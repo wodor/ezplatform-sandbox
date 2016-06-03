@@ -1,0 +1,32 @@
+web:
+    build: .
+    links:
+        - mysql
+        - selenium
+    expose:
+        - 80
+    volumes:
+        - .:/app
+    environment:
+        DATABASE_HOST: mysql
+        DATABASE_PORT: null
+        DATABASE_NAME: ezdev
+        DATABASE_USER: ezuser
+        DATABASE_PASSWORD: ezpass
+        SYMFONY_ENV: dev
+
+mysql:
+    image: mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: ezdev
+        MYSQL_USER: ezuser
+        MYSQL_PASSWORD: ezpass
+    expose:
+        - 3306
+
+# Selenium, for testing purposes
+selenium:
+    image: selenium/standalone-chrome:2.49.1
+    expose:
+        - 4444
